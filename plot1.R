@@ -11,8 +11,21 @@ plot1 = function() {
             
         
         sum <- select(NEI, Emissions, year) %>% group_by(year) %>% summarise(Emissions = sum(Emissions))
-        barplot(sum$Emissions, names.arg = sum$year, xlab="Years", ylab = "Emissions")
 
+        with(sum, 
+             plot(
+                 year,
+                 Emissions, 
+                 pch = 19,
+                 xlab="Years",  
+                 ylab = "Emissions, tons",
+                 main = "PM2.5 Emissions"
+             )
+        ) 
+        
+        model <- lm(Emissions ~ year, sum)              
+        abline(model, col = "green")
+        
         dev.copy(png, file = "plot1.png")
         dev.off()
         

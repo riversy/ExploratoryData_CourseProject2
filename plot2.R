@@ -11,13 +11,19 @@ plot2 = function() {
         
         sum <- select(NEI, Emissions, year, fips) %>% filter(fips == 24510) %>% group_by(year) %>% summarise(Emissions = sum(Emissions))
 
-        barplot(
-            sum$Emissions, 
-            names.arg = sum$year, 
-            xlab="Years",  
-            ylab = "Emissions, tons",
-            main = "PM2.5 in the Baltimore City, Maryland"
-        )        
+        with(sum, 
+            plot(
+                year,
+                Emissions, 
+                pch = 20,
+                xlab="Years",  
+                ylab = "Emissions, tons",
+                main = "PM2.5 in the Baltimore City, Maryland"
+            )
+        ) 
+
+        model <- lm(Emissions ~ year, sum)    
+        abline(model, col = "green") 
 
         dev.copy(png, file = "plot2.png")
         dev.off()
