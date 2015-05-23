@@ -15,7 +15,7 @@ plot2 = function() {
             plot(
                 year,
                 Emissions, 
-                pch = 20,
+                pch = 19,
                 xlab="Years",  
                 ylab = "Emissions, tons",
                 main = "PM2.5 in the Baltimore City, Maryland"
