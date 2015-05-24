@@ -15,8 +15,6 @@ plot4 = function() {
 
         sum <- select(mergedNEI, Emissions, year) %>% group_by(year) %>% summarise(Emissions = sum(Emissions))
 
-        View(sum)
-        
         p <- ggplot(sum, aes(year, Emissions))
         p + 
         geom_point() + 
